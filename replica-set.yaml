@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: aplikasi-nginx-new
+  labels:
+    app: test
+    tier: web-server
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: web-server
+  template:
+    metadata:
+      labels:
+        tier: web-server
+    spec:
+      containers:
+      - name: new-nginx
+        image: nginx:alpine
+        resources:
+          limits:
+            memory: "10Mi"
+            cpu: "10m"
+        ports:
+          - containerPort: 80
